@@ -29,6 +29,14 @@ a {
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
+.home-link {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #238636;
+    font-size: 14px;
+}
+.home-link:hover { background-color: #2ea043; }
+
 .logo {
     font-size: 22px;
     font-weight: bold;
@@ -146,6 +154,7 @@ function startUpdate() {
 <!-- NAVBAR -->
 <div class="navbar">
     <div class="logo">Stock Insight — Admin</div>
+    <a href="sample.jsp" class="home-link">Go to Home</a>
 </div>
 
 <!-- MAIN PAGE -->

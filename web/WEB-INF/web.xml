@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                        http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-     version="3.1">
-
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    <!-- ================== Servlets ================== -->
 
     <!-- Trend Servlet -->
     <servlet>
@@ -18,9 +13,50 @@
         <servlet-class>com.project.servlet.TrendServlet</servlet-class>
     </servlet>
 
+    <!-- Momentum Servlet -->
+    <servlet>
+        <servlet-name>MomentumServlet</servlet-name>
+        <servlet-class>com.project.servlet.MomentumServlet</servlet-class>
+    </servlet>
+
+    <!-- Volume Servlet -->
+    <servlet>
+        <servlet-name>VolumeServlet</servlet-name>
+        <servlet-class>com.project.servlet.VolumeServlet</servlet-class>
+    </servlet>
+
+    <!-- Risk Servlet -->
+    <servlet>
+        <servlet-name>RiskServlet</servlet-name>
+        <servlet-class>com.project.servlet.RiskServlet</servlet-class>
+    </servlet>
+
+    <!-- ================== Mappings ================== -->
+
     <servlet-mapping>
         <servlet-name>TrendServlet</servlet-name>
         <url-pattern>/trends</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MomentumServlet</servlet-name>
+        <url-pattern>/momentum</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>VolumeServlet</servlet-name>
+        <url-pattern>/volume</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RiskServlet</servlet-name>
+        <url-pattern>/risk</url-pattern>
+    </servlet-mapping>
+
+    <!-- ================== Session ================== -->
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
 </web-app>

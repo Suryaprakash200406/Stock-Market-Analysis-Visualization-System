@@ -137,7 +137,7 @@ a { text-decoration: none; color: inherit; }
             <p>Analyzes historical price movements using trend indicators to identify the overall 
                  market direction. This section helps users understand whether the stock is showing 
                  a stable uptrend, downtrend, or sideways movement over time.</p>
-            <span class="btn" href="trends?symbol=<%= symbol %>">View Trend</span>
+            <a class="btn" href="trends?symbol=<%= symbol %>">View Trend</a>
         </div>
 
         <div class="card">
@@ -145,7 +145,8 @@ a { text-decoration: none; color: inherit; }
             <p>Examines trading volume patterns to evaluate market participation and strength behind 
                 price movements. This section helps determine whether price changes are supported by 
                 strong buying or selling activity.</p>
-            <span class="btn">View Volume</span>
+            <a class="btn" href="volume?symbol=<%=symbol%>&range=1Y">View Volume</a>
+
         </div>
 
         <div class="card">
@@ -153,7 +154,8 @@ a { text-decoration: none; color: inherit; }
             <p>Evaluates the risk level of the stock by analyzing price volatility and fluctuations 
                 over time. This helps users understand how stable or unpredictable the stock is,
                  making it easier to align investment decisions with their risk tolerance.</p>
-            <span class="btn">View Risk</span>
+            <a class="btn" href="risk?symbol=<%= symbol %>">View Risk</a>
+
         </div>
 
         <div class="card">
@@ -161,7 +163,7 @@ a { text-decoration: none; color: inherit; }
             <p>Uses momentum-based indicators to measure the speed and strength of price changes. 
                 This helps identify potential entry and exit points by highlighting overbought or 
                 oversold conditions and shifts in market momentum..</p>
-            <span class="btn">View Momentum</span>
+            <a class="btn" href="momentum?symbol=<%= symbol %>">View Momentum</a>
         </div>
 
         <div class="card">

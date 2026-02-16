@@ -123,7 +123,7 @@ function goToCompanyPage() {
 <div class="navbar">
     <div class="logo">Stock Insight</div>
     <div class="nav-links">
-        <a href="landing.jsp">Home</a>
+        <a href="sample.jsp">Home</a>
         <a href="index.jsp">Admin Login</a>
     </div>
 </div>
@@ -145,7 +145,7 @@ function goToCompanyPage() {
             <select id="companySelect" onchange="enableViewButton()">
                 <option value="">-- Choose Company --</option>
                 <option value="TCS">TCS</option>
-                <option value="INFY">INFY</option>
+                <option value="INFY">INFOSYS</option>
             </select>
             <button id="viewBtn" class="btn" disabled onclick="goToCompanyPage()">View Details</button>
         </div>
