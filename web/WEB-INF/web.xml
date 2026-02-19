@@ -30,6 +30,12 @@
         <servlet-name>RiskServlet</servlet-name>
         <servlet-class>com.project.servlet.RiskServlet</servlet-class>
     </servlet>
+    
+    <!-- Stock Summary Servlet -->
+    <servlet>
+        <servlet-name>StockSummaryServlet</servlet-name>
+        <servlet-class>com.project.servlet.StockSummaryServlet</servlet-class>
+    </servlet>
 
     <!-- ================== Mappings ================== -->
 
@@ -52,11 +58,27 @@
         <servlet-name>RiskServlet</servlet-name>
         <url-pattern>/risk</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>StockSummaryServlet</servlet-name>
+        <url-pattern>/summary</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ViewExportServlet</servlet-name>
+        <servlet-class>com.project.servlet.ViewExportServlet</servlet-class>
+    </servlet>
+
 
     <!-- ================== Session ================== -->
 
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <servlet-mapping>
+        <servlet-name>ViewExportServlet</servlet-name>
+        <url-pattern>/view-export</url-pattern>
+    </servlet-mapping>
 
 </web-app>

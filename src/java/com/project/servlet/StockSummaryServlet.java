@@ -1,42 +1,34 @@
 package com.project.servlet;
 
-import com.project.model.TrendResult;
-import com.project.model.StockData;
+import com.project.model.StockSummaryResult;
 import com.project.service.StockAnalyzerService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-public class TrendServlet extends HttpServlet {
+public class StockSummaryServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String symbol = request.getParameter("symbol");
-        String range = request.getParameter("range");
 
         if (symbol == null || symbol.isEmpty()) {
             response.sendRedirect("companyDashboard.jsp");
             return;
         }
-        if (range == null || range.isEmpty()) range = "1Y";
 
         try {
             StockAnalyzerService analyzer = new StockAnalyzerService();
 
-            // Load full data and filter by calendar range
-            StockData data = analyzer.filterByRange(analyzer.loadStockData(symbol), range);
+            StockSummaryResult result = analyzer.analyzeStockSummary(symbol);
 
-            // Analyze trend and get the result object
-            TrendResult result = analyzer.analyzeTrend(data);
-
-            // Pass the result object directly to JSP
             request.setAttribute("symbol", symbol);
-            request.setAttribute("range", range);
-            request.setAttribute("result", result);
+            request.setAttribute("summary", result);
 
-            request.getRequestDispatcher("trends.jsp").forward(request, response);
+            request.getRequestDispatcher("stock_summary.jsp")
+                   .forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

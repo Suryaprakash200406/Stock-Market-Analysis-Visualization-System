@@ -171,15 +171,15 @@ a { text-decoration: none; color: inherit; }
             <p>Provides a consolidated overview of the stock’s key characteristics by applying
                predefined thresholds. This section categorizes the stock based on trend strength, 
                risk level, and general behavior to give users a quick, easy-to-understand snapshot.</p>
-            <span class="btn">View Summary</span>
+            <a class="btn" href="summary?symbol=<%= symbol %>">View Summary</a>
         </div>
 
         <div class="card">
-            <h3>Export Data</h3>
-            <p>Allows users to download historical price data and analytical results for offline review. 
-                This feature is useful for further analysis, academic purposes, reporting, or maintaining
-                personal investment records.</p>
-            <span class="btn">Export CSV</span>
+            <h3>View/Export Data</h3>
+            <p>Allows users to view and download historical price data for offline use.
+               This feature supports further analysis, academic work, reporting, or maintaining
+               personal investment records with flexible date-range selection.</p>
+            <a class="btn" href="view-export?symbol=<%= symbol %>">View/Export</a>
         </div>
     </div>
 </div>
