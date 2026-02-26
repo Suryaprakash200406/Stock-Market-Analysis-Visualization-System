@@ -1,14 +1,14 @@
 package com.project.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * This class stores BASIC company information.
- * It does NOT read CSV files.
- * 
- * Easy to extend:
- * Just add a new entry to the map when a new company is added.
+/**
+ * Reads company info dynamically from company_info.csv
+ * Provides symbol → CompanyInfo mapping.
  */
 public class CompanyRegistry {
 
@@ -24,26 +24,35 @@ public class CompanyRegistry {
         }
     }
 
+    private static final String DATA_PATH =
+            "C:\\Users\\ELCOT\\Documents\\NetBeansProjects\\MyFirstServletProject\\data\\company_info.csv";
+
     private static final Map<String, CompanyInfo> companies = new HashMap<>();
 
     static {
-        // TCS
-        companies.put("TCS",
-            new CompanyInfo(
-                "Tata Consultancy Services",
-                "IT Services",
-                "India’s largest IT services company providing consulting and software solutions."
-            )
-        );
+        loadCompanies();
+    }
 
-        // INFY
-        companies.put("INFY",
-            new CompanyInfo(
-                "Infosys",
-                "IT Services",
-                "Global leader in digital services and consulting."
-            )
-        );
+    private static void loadCompanies() {
+        File csvFile = new File(DATA_PATH);
+        if (!csvFile.exists()) return;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            String line = br.readLine(); // skip header
+            while ((line = br.readLine()) != null) {
+                String[] cols = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                if (cols.length < 4) continue;
+
+                String symbol = cols[0].trim();
+                String name = cols[1].trim();
+                String sector = cols[2].trim();
+                String description = cols[3].trim();
+
+                companies.put(symbol, new CompanyInfo(name, sector, description));
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading company_info.csv: " + e.getMessage());
+        }
     }
 
     public static CompanyInfo getCompany(String symbol) {

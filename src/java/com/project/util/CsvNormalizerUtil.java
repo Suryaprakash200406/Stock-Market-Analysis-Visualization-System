@@ -15,15 +15,17 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+/**
+ * Normalize offline historical CSV + insert today NSE data.
+ * Uses CleanPathResolver to find proper file path (sector-based)
+ */
 public class CsvNormalizerUtil {
 
     private static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale.ENGLISH);
 
     private static final String RAW_PATH =
-            "D:\\Actual_Company_Datasets\\Raw\\";
-    private static final String CLEAN_PATH =
-            "D:\\Actual_Company_Datasets\\Clean\\";
+            "C:\\Users\\ELCOT\\Documents\\NetBeansProjects\\MyFirstServletProject\\data\\Raw";
 
     private static final Random random = new Random();
     private static final DecimalFormat priceFormat =
@@ -34,11 +36,11 @@ public class CsvNormalizerUtil {
             throws Exception {
 
         Map<LocalDate, String[]> records = new TreeMap<>();
-        File cleanFile = new File(CLEAN_PATH + symbol + ".csv");
+        File cleanFile = CleanPathResolver.getCleanFile(symbol);
 
         if (cleanFile.exists()) {
             try (CSVReader reader = new CSVReader(new FileReader(cleanFile))) {
-                reader.readNext();
+                reader.readNext(); // skip header
                 String[] row;
                 while ((row = reader.readNext()) != null) {
                     records.put(
@@ -49,7 +51,7 @@ public class CsvNormalizerUtil {
             }
         }
 
-        File rawDir = new File(RAW_PATH + symbol);
+        File rawDir = new File(RAW_PATH, symbol);
         if (!rawDir.exists()) return records;
 
         File[] files = rawDir.listFiles(f -> f.getName().endsWith(".csv"));
@@ -57,7 +59,7 @@ public class CsvNormalizerUtil {
 
         for (File f : files) {
             try (CSVReader reader = new CSVReader(new FileReader(f))) {
-                reader.readNext();
+                reader.readNext(); // skip header
                 String[] row;
                 while ((row = reader.readNext()) != null) {
                     String[] formattedRow = new String[]{
@@ -83,7 +85,7 @@ public class CsvNormalizerUtil {
             Map<LocalDate, String[]> records,
             JSONObject json) {
 
-        if (json == null) return; // 🔹 KEY FIX
+        if (json == null) return;
 
         LocalDate today = LocalDate.now();
         if (records.containsKey(today)) return;
@@ -117,8 +119,9 @@ public class CsvNormalizerUtil {
 
         insertTodayFromJson(records, json);
 
+        File cleanFile = CleanPathResolver.getCleanFile(symbol);
         try (CSVWriter writer =
-                     new CSVWriter(new FileWriter(CLEAN_PATH + symbol + ".csv"))) {
+                     new CSVWriter(new FileWriter(cleanFile))) {
 
             writer.writeNext(
                     new String[]{"Date", "Open", "High", "Low", "Close", "Volume"}

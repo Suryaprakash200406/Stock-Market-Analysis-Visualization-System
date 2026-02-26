@@ -1,19 +1,19 @@
 package com.project.service;
 
 import com.project.model.StockData;
+import com.project.util.CleanPathResolver;
 
 import java.io.*;
 import java.util.*;
 
 public class StockDataService {
 
-    private static final String CLEAN_PATH = "D:/Actual_Company_Datasets/Clean/";
-
     /**
-     * Load full historical data for a company symbol
+     * Load full historical data for a company symbol using CleanPathResolver
      */
     public StockData loadStockData(String symbol) throws Exception {
-        File csvFile = new File(CLEAN_PATH + symbol + ".csv");
+        // Get exact CSV file path from CleanPathResolver
+        File csvFile = CleanPathResolver.getCleanFile(symbol);
         if (!csvFile.exists()) throw new Exception("CSV not found for " + symbol);
 
         List<String> dates = new ArrayList<>();
@@ -27,6 +27,7 @@ public class StockDataService {
             br.readLine(); // skip header
             String line;
             while ((line = br.readLine()) != null) {
+                // CSV can have quoted values with commas
                 String[] cols = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 if (cols.length < 6) continue;
 
@@ -42,9 +43,7 @@ public class StockDataService {
         return new StockData(dates, open, high, low, close, volume);
     }
 
-    /**
-     * Filter stock data by index range
-     */
+    // -------------------- Subset helpers --------------------
     public StockData getSubData(StockData data, int startIndex, int endIndex) {
         return new StockData(
                 data.getDates().subList(startIndex, endIndex),
@@ -56,9 +55,6 @@ public class StockDataService {
         );
     }
 
-    /**
-     * Get last N days of stock data
-     */
     public StockData getLastNDays(StockData data, int n) {
         int size = data.size();
         int startIndex = Math.max(0, size - n);

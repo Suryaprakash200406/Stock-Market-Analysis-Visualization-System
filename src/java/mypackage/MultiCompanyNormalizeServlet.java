@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MultiCompanyNormalizeServlet extends HttpServlet {
 
     private static final String RAW_PATH =
-            "D:\\Actual_Company_Datasets\\Raw\\";
+            "C:\\Users\\ELCOT\\Documents\\NetBeansProjects\\MyFirstServletProject\\data\\Raw";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,42 +35,26 @@ public class MultiCompanyNormalizeServlet extends HttpServlet {
             String symbol = companyDir.getName();
             JSONObject json = null;
 
-            // 🔹 TRY NSE fetch (optional)
             try {
                 json = NseApiFetcher.fetch(symbol);
             } catch (Exception e) {
-                System.err.println(
-                        "NSE fetch failed for " + symbol + ": " + e.getMessage()
-                );
+                System.err.println("NSE fetch failed for " + symbol + ": " + e.getMessage());
             }
 
-            // 🔹 ALWAYS update CSV (offline + optional online)
             try {
                 CsvNormalizerUtil.processCompany(symbol, json);
             } catch (Exception e) {
-                System.err.println(
-                        "CSV update failed for " + symbol + ": " + e.getMessage()
-                );
+                System.err.println("CSV update failed for " + symbol + ": " + e.getMessage());
             }
         }
 
-        // ✅ SUCCESS MESSAGE FOR SAME PAGE
-        req.setAttribute(
-                "msg",
-                "All Company Data Updated Successfully"
-        );
-
+        req.setAttribute("msg", "All Company Data Updated Successfully");
         forwardToIndex(req, resp);
     }
 
-    // 🔹 Helper method for clean forwarding
-    private void forwardToIndex(
-            HttpServletRequest req,
-            HttpServletResponse resp
-    ) throws IOException {
+    private void forwardToIndex(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            req.getRequestDispatcher("index.jsp")
-               .forward(req, resp);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
         } catch (Exception e) {
             throw new IOException(e);
         }
