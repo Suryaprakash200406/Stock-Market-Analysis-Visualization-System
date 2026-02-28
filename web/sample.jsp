@@ -1,3 +1,4 @@
+<%@ page import="java.util.*, com.project.util.CompanyRegistry" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +115,18 @@ function goToCompanyPage() {
         window.location.href = "companyDashboard.jsp?symbol=" + company;
     }
 }
+
+function enableSectorButton() {
+    const select = document.getElementById("sectorSelect");
+    document.getElementById("sectorBtn").disabled = (select.value === "");
+}
+
+function goToSectorPage() {
+    const sector = document.getElementById("sectorSelect").value;
+    if (sector !== "") {
+        window.location.href = "sectorDashboard.jsp?sector=" + sector;
+    }
+}
 </script>
 
 </head>
@@ -124,7 +137,7 @@ function goToCompanyPage() {
     <div class="logo">Stock Insight</div>
     <div class="nav-links">
         <a href="sample.jsp">Home</a>
-        <a href="index.jsp">Admin Login</a>
+        <a href="admin_login.jsp">Admin Login</a>
     </div>
 </div>
 
@@ -140,21 +153,66 @@ function goToCompanyPage() {
 
     <div class="card-grid">
         <!-- SELECT COMPANY -->
+        <%
+            List<CompanyRegistry.CompanyInfo> companies =
+                    CompanyRegistry.getAllCompanies();
+
+            // Sort alphabetically by company name (case-insensitive)
+            companies.sort(Comparator.comparing(
+                    c -> c.name.toLowerCase()
+            ));
+        %>
+
         <div class="card">
             <h3>Select Company</h3>
+
             <select id="companySelect" onchange="enableViewButton()">
                 <option value="">-- Choose Company --</option>
-                <option value="TCS">TCS</option>
-                <option value="INFY">INFOSYS</option>
-            </select>
-            <button id="viewBtn" class="btn" disabled onclick="goToCompanyPage()">View Details</button>
-        </div>
 
-        <!-- COMPARE COMPANIES -->
-        <div class="card" onclick="window.location.href='compareCompanies.jsp'" style="cursor:pointer;">
-            <h3>Comparative Market Analysis</h3>
-            <p>Compare multiple companies based on traded volume, trend strength, and performance metrics.</p>
-            <span class="btn">Go to Analyze</span>
+                <% for (CompanyRegistry.CompanyInfo c : companies) { %>
+                    <option value="<%= c.symbol %>">
+                        <%= c.name %>
+                    </option>
+                <% } %>
+
+            </select>
+
+            <button id="viewBtn"
+                    class="btn"
+                    disabled
+                    onclick="goToCompanyPage()">
+                View Details
+            </button>
+        </div>
+        <!-- Sector wise analysis -->
+        <div class="card">
+            <h3>Select Sector</h3>
+
+            <select id="sectorSelect" onchange="enableSectorButton()">
+                <option value="">-- Choose Sector --</option>
+                <option value="Auto">Auto</option>  
+                <option value="Banking">Banking</option>
+                <option value="Cement">Cement</option>
+                <option value="Chemicals">Chemicals</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Energy">Energy</option>
+                <option value="FMGC">FMGC</option>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Insurance">Insurance</option>
+                <option value="IT">IT</option>
+                <option value="Metals">Metals</option>
+                <option value="Pharma">Pharma</option>
+                <option value="Power">Power</option>
+                <option value="Telecom">Telecom</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <button id="sectorBtn"
+                    class="btn"
+                    disabled
+                    onclick="goToSectorPage()">
+                Explore Sectors
+            </button>
         </div>
     </div>
 </div>

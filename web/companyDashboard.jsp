@@ -6,7 +6,7 @@
     CompanyRegistry.CompanyInfo company = CompanyRegistry.getCompany(symbol);
 
     if (company == null) {
-        company = new CompanyRegistry.CompanyInfo("Unknown", "N/A", "No data available for this symbol.");
+        company = new CompanyRegistry.CompanyInfo(symbol, "Unknown", "N/A", "No data available for this symbol.");
     }
 %>
 

@@ -168,7 +168,7 @@ function startUpdate() {
             for all registered companies. Make sure all the data 
             is exists in the required directory before updating data.
             If you want to download any historical data please visit
-            <a href="https://www.nseindia.com/">https://www.nseindia.com/</a> and search the company with  
+            <a href="https://www.nseindia.com/" target="blank">https://www.nseindia.com/</a> and search the company with  
             valid symbol.
         </p>
 
@@ -192,7 +192,7 @@ function startUpdate() {
 
     <!-- ACTIVATE COMPANY (BIG) -->
     <div class="activate-panel">
-        <h2>Activate More Companies</h2>
+        <h2>Add More Companies</h2>
         <p>
             Manage the list of companies available in the system by activating
             new datasets. This allows administrators to onboard additional
@@ -207,10 +207,8 @@ function startUpdate() {
             <br>• Activation status
         </p>
 
-        <div class="activate-btn"
-             onclick="window.location.href='activateCompany.html'">
-            Activate New Company
-        </div>
+        <a href="add_company.jsp" class="activate-btn">Add New Company</a>
+        
     </div>
 
 </div>

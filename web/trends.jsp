@@ -170,7 +170,6 @@ tr:hover{
 </head>
 <body>
 
-<!-- ✅ NEW HEADER (Same Structure as Risk Page) -->
 <div class="header">
     <h2><%=symbol%> Trend Analysis</h2>
     <a href="companyDashboard.jsp?symbol=<%=symbol%>" class="home-link">Go Back</a>

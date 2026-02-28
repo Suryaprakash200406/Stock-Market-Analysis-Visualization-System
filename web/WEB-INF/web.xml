@@ -7,34 +7,44 @@
 
     <!-- ================== Servlets ================== -->
 
-    <!-- Trend Servlet -->
+ 
     <servlet>
         <servlet-name>TrendServlet</servlet-name>
         <servlet-class>com.project.servlet.TrendServlet</servlet-class>
     </servlet>
 
-    <!-- Momentum Servlet -->
+
     <servlet>
         <servlet-name>MomentumServlet</servlet-name>
         <servlet-class>com.project.servlet.MomentumServlet</servlet-class>
     </servlet>
 
-    <!-- Volume Servlet -->
+   
     <servlet>
         <servlet-name>VolumeServlet</servlet-name>
         <servlet-class>com.project.servlet.VolumeServlet</servlet-class>
     </servlet>
 
-    <!-- Risk Servlet -->
+
     <servlet>
         <servlet-name>RiskServlet</servlet-name>
         <servlet-class>com.project.servlet.RiskServlet</servlet-class>
     </servlet>
     
-    <!-- Stock Summary Servlet -->
+ 
     <servlet>
         <servlet-name>StockSummaryServlet</servlet-name>
         <servlet-class>com.project.servlet.StockSummaryServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AddCompanyServlet</servlet-name>
+        <servlet-class>com.project.servlet.AddCompanyServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SectorGrowthServlet</servlet-name>
+        <servlet-class>com.project.servlet.SectorGrowthServlet</servlet-class>
     </servlet>
 
     <!-- ================== Mappings ================== -->
@@ -68,17 +78,26 @@
         <servlet-name>ViewExportServlet</servlet-name>
         <servlet-class>com.project.servlet.ViewExportServlet</servlet-class>
     </servlet>
-
-
+    
+    <servlet-mapping>
+        <servlet-name>AddCompanyServlet</servlet-name>
+        <url-pattern>/addCompany</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ViewExportServlet</servlet-name>
+        <url-pattern>/view-export</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>SectorGrowthServlet</servlet-name>
+        <url-pattern>/sectorGrowth</url-pattern>
+    </servlet-mapping>
+    
     <!-- ================== Session ================== -->
 
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-
-    <servlet-mapping>
-        <servlet-name>ViewExportServlet</servlet-name>
-        <url-pattern>/view-export</url-pattern>
-    </servlet-mapping>
 
 </web-app>
