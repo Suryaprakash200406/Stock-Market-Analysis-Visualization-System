@@ -117,6 +117,7 @@ a {
 .activate-btn {
     margin-top: 24px;
     display: inline-block;
+    margin-right: 20px;
     padding: 14px 26px;
     background-color: #58a6ff;
     color: #0d1117;
@@ -208,6 +209,7 @@ function startUpdate() {
         </p>
 
         <a href="add_company.jsp" class="activate-btn">Add New Company</a>
+        <a href="remove_company.jsp" class="activate-btn">Remove Company</a>
         
     </div>
 

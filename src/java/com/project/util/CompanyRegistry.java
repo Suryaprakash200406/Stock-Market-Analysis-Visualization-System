@@ -98,4 +98,23 @@ public class CompanyRegistry {
     public static void reload() {
         loadCompanies();
     }
+    
+    /**
+    * Get all company symbols by sector
+    */
+    public static List<String> getSymbolsBySector(String sector) {
+
+        List<String> symbols = new ArrayList<>();
+
+        if (sector == null) return symbols;
+
+        companies.forEach((symbol, info) -> {
+            if (info.sector != null &&
+                info.sector.equalsIgnoreCase(sector)) {
+                symbols.add(symbol);
+            }
+        });
+
+        return symbols;
+    }
 }

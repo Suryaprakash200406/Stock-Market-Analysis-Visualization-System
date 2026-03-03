@@ -36,6 +36,16 @@ public class RiskServlet extends HttpServlet {
             double high1Y = closes1Y.stream().mapToDouble(d -> d).max().orElse(0);
             double low1Y = closes1Y.stream().mapToDouble(d -> d).min().orElse(0);
 
+            // -------- Determine Risk Category (NEW) --------
+            String riskCategory;
+            if (volatility >= 30 || maxDrawdown >= 40) {
+                riskCategory = "High";
+            } else if (volatility >= 15 || maxDrawdown >= 20) {
+                riskCategory = "Moderate";
+            } else {
+                riskCategory = "Low";
+            }
+
             // -------- 2️⃣ Chart data based on selected range --------
             StockData chartData = analyzer.filterByRange(fullData, range);
             List<Double> chartCloses = chartData.getClose();
@@ -51,6 +61,7 @@ public class RiskServlet extends HttpServlet {
             request.setAttribute("maxDrawdown", maxDrawdown);
             request.setAttribute("high1Y", high1Y);
             request.setAttribute("low1Y", low1Y);
+            request.setAttribute("riskCategory", riskCategory); 
 
             // Chart
             request.setAttribute("labels", chartDates);

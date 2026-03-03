@@ -196,7 +196,7 @@ function goToSectorPage() {
                 <option value="Chemicals">Chemicals</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Energy">Energy</option>
-                <option value="FMGC">FMGC</option>
+                <option value="FMCG">FMCG</option>
                 <option value="Infrastructure">Infrastructure</option>
                 <option value="Insurance">Insurance</option>
                 <option value="IT">IT</option>

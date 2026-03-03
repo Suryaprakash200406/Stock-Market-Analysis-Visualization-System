@@ -396,5 +396,117 @@ public class StockAnalyzerService {
         Collections.reverse(records);
         return records;
     }
+    
+    // -------------------- Generic Moving Average --------------------
+    public Double getLatestMovingAverage(List<Double> closes, int period) { 
 
+        if (closes == null || closes.size() < period) return null;
+
+        double sum = 0;
+
+        for (int i = closes.size() - period; i < closes.size(); i++) {
+                sum += closes.get(i);
+        }
+
+        return sum / period;
+    }
+        
+    // -------------------- Convert date string list to LocalDate --------------------
+    public List<LocalDate> getDateListAsLocalDate(StockData data) {
+
+        List<LocalDate> dateList = new ArrayList<>();
+
+        for (String dateStr : data.getDates()) {
+            dateList.add(LocalDate.parse(dateStr, CSV_DATE_FORMAT));
+        }
+
+        return dateList;
+    }
+
+    // -------------------- Rolling Volatility List --------------------
+    public List<Double> getRollingVolatilityList(List<Double> closes, int window) {
+
+        List<Double> rollingVolList = new ArrayList<>();
+
+        if (closes.size() < window) return rollingVolList;
+
+        for (int i = 0; i < closes.size(); i++) {
+
+            if (i < window) {
+                rollingVolList.add(null);
+                continue;
+            }
+
+            List<Double> subList = closes.subList(i - window, i);
+            double vol = getVolatility(subList);
+            rollingVolList.add(vol);
+        }
+
+        return rollingVolList;
+    }
+
+    public double getMovingAverage(List<Double> closes, int period) {
+
+        if (closes == null || closes.size() < period) {
+            return 0.0;
+        }
+
+        double sum = 0.0;
+
+        // Take last "period" values
+        for (int i = closes.size() - period; i < closes.size(); i++) {
+            sum += closes.get(i);
+        }
+
+        return sum / period;
+    }
+    
+    public double getMax(List<Double> closes) {
+
+        if (closes == null || closes.isEmpty()) {
+            return 0.0;
+        }
+
+        double max = closes.get(0);
+
+        for (double value : closes) {
+            if (value > max) {
+                max = value;
+            }
+        }
+
+        return max;
+    }
+    
+    public double getMin(List<Double> closes) {
+
+        if (closes == null || closes.isEmpty()) {
+            return 0.0;
+        }
+
+        double min = closes.get(0);
+
+        for (double value : closes) {
+            if (value < min) {
+                min = value;
+            }
+        }
+
+        return min;
+    }
+    
+    public List<Double> getLast1YearCloses(List<Double> closes) {
+
+        if (closes == null || closes.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // If data less than 250 trading days, return full list
+        if (closes.size() <= 250) {
+            return closes;
+        }
+
+        // Return last 250 trading days (~1 year)
+        return closes.subList(closes.size() - 250, closes.size());
+    }
 }

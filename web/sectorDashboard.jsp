@@ -130,7 +130,7 @@ a { text-decoration: none; color: inherit; }
             <h3>Sector Growth Performance</h3>
                <p>
                     Assess the overall performance of a sector by calculating average 
-                    return percentages across 1 Month, 3 Month, 6 Month, and 1 Year 
+                    return percentages across 1 Month, 6 Month, 1 Year and 5 Year 
                     periods. This section provides a consolidated view of sector-wide 
                     growth trends and highlights the strongest and weakest performing 
                     stock based on recent return analysis. It helps determine whether 
@@ -166,7 +166,7 @@ a { text-decoration: none; color: inherit; }
         </div>
 
         <!-- Sector Price Structure -->
-        <div class="card" onclick="location.href='sectorStructure?sector=<%= sector %>'">
+        <div class="card" onclick="location.href='sectorPrice?sector=<%= sector %>'">
             <h3>Sector Price Structure</h3>
                 <p>
                     Examine the sector’s structural positioning by comparing current 

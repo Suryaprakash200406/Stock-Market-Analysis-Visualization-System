@@ -6,35 +6,35 @@
                         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
     <!-- ================== Servlets ================== -->
-
  
     <servlet>
         <servlet-name>TrendServlet</servlet-name>
         <servlet-class>com.project.servlet.TrendServlet</servlet-class>
     </servlet>
 
-
     <servlet>
         <servlet-name>MomentumServlet</servlet-name>
         <servlet-class>com.project.servlet.MomentumServlet</servlet-class>
     </servlet>
-
    
     <servlet>
         <servlet-name>VolumeServlet</servlet-name>
         <servlet-class>com.project.servlet.VolumeServlet</servlet-class>
     </servlet>
 
-
     <servlet>
         <servlet-name>RiskServlet</servlet-name>
         <servlet-class>com.project.servlet.RiskServlet</servlet-class>
     </servlet>
-    
- 
+  
     <servlet>
         <servlet-name>StockSummaryServlet</servlet-name>
         <servlet-class>com.project.servlet.StockSummaryServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ViewExportServlet</servlet-name>
+        <servlet-class>com.project.servlet.ViewExportServlet</servlet-class>
     </servlet>
     
     <servlet>
@@ -46,6 +46,27 @@
         <servlet-name>SectorGrowthServlet</servlet-name>
         <servlet-class>com.project.servlet.SectorGrowthServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>SectorParticipationServlet</servlet-name>
+        <servlet-class>com.project.servlet.SectorParticipationServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SectorRiskServlet</servlet-name>
+        <servlet-class>com.project.servlet.SectorRiskServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SectorPriceServlet</servlet-name>
+        <servlet-class>com.project.servlet.SectorPriceServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>RemoveCompanyServlet</servlet-name>
+        <servlet-class>com.project.servlet.RemoveCompanyServlet</servlet-class>
+    </servlet>
+
 
     <!-- ================== Mappings ================== -->
 
@@ -74,10 +95,10 @@
         <url-pattern>/summary</url-pattern>
     </servlet-mapping>
     
-    <servlet>
+    <servlet-mapping>
         <servlet-name>ViewExportServlet</servlet-name>
-        <servlet-class>com.project.servlet.ViewExportServlet</servlet-class>
-    </servlet>
+        <url-pattern>/view-export</url-pattern>
+    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>AddCompanyServlet</servlet-name>
@@ -85,15 +106,30 @@
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>ViewExportServlet</servlet-name>
-        <url-pattern>/view-export</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
         <servlet-name>SectorGrowthServlet</servlet-name>
         <url-pattern>/sectorGrowth</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>SectorParticipationServlet</servlet-name>
+        <url-pattern>/sectorParticipation</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>SectorRiskServlet</servlet-name>
+        <url-pattern>/sectorRisk</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SectorPriceServlet</servlet-name>
+        <url-pattern>/sectorPrice</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>RemoveCompanyServlet</servlet-name>
+        <url-pattern>/removeCompany</url-pattern>
+    </servlet-mapping>
+
     <!-- ================== Session ================== -->
 
     <session-config>
